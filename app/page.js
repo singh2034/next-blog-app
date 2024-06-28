@@ -1,9 +1,13 @@
+"use client";
 
+import BlogList from "@/Components/BlogList";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <BlogList />
+    </div>
+  );
+};
 
-export default page
+export default page;

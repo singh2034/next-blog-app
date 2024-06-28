@@ -25,7 +25,7 @@ const Header = () => {
         </p>
         <form
           className="flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border border-black shadow-[-7px_7px_0px_#000]"
-          action="submit"
+          action=""
         >
           <input
             type="email"
