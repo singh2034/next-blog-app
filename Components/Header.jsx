@@ -1,17 +1,20 @@
 import Image from "next/image";
 import { assets } from "@/public/assets";
+import Link from "next/link";
 
 const Header = () => {
   return (
     <div className="py-5 px-5 md:px-12 lg:px-28">
       <div className="flex items-center justify-between">
-        <Image
-          src={assets.logo}
-          width={180}
-          height={180}
-          alt="Logo"
-          className="w-[130px] sm:w-auto"
-        />
+        <Link href={"/"}>
+          <Image
+            src={assets.logo}
+            width={180}
+            height={180}
+            alt="Logo"
+            className="w-[130px] sm:w-auto"
+          />
+        </Link>
         <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000]">
           Get Started <Image src={assets.arrow} alt="arrow-logo-button" />
         </button>
