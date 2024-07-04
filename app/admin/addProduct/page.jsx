@@ -1,13 +1,12 @@
 "use client";
 
-import { assets } from "@/public/assets";
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -20,8 +19,6 @@ const AddProduct = () => {
     const name = event.target.name;
     const value = event.target.value;
     setData((data) => ({ ...data, [name]: value }));
-    // for only data show in console otherwise useless
-    // console.log(data);
   };
 
   const onSubmitHandler = async (e) => {
@@ -31,8 +28,12 @@ const AddProduct = () => {
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("author", data.author);
-    formData.append("authorImg", data.authorImg);
+    formData.append(
+      "authorImg",
+      data.authorImg ? data.authorImg : "/profile_icon.png"
+    );
     formData.append("image", image);
+
     const response = await axios.post("/api/blog", formData);
     if (response.data.success) {
       toast.success(response.data.msg);
@@ -55,7 +56,7 @@ const AddProduct = () => {
         <p className="text-xl">Upload Thumbnail</p>
         <label htmlFor="image">
           <Image
-            src={!image ? assets.upload_area : URL.createObjectURL(image)}
+            src={image ? URL.createObjectURL(image) : "/upload_area.png"}
             width={140}
             height={70}
             alt="upload-area"
@@ -84,7 +85,6 @@ const AddProduct = () => {
           name="description"
           onChange={onChangeHandler}
           value={data.description}
-          type="text"
           placeholder="write content here"
           required
           rows={6}
