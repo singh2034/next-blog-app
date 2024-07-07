@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { assets } from "@/public/assets";
 import Link from "next/link";
-import { useState } from "react";
 import axios from "axios";
+import { assets } from "@/public/assets";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const Header = () => {
