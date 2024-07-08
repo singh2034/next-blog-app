@@ -19,3 +19,9 @@ export const POST = async (request) => {
   await EmailModel.create(emailData);
   return NextResponse.json({ success: true, msg: "Email Subscribed" });
 };
+
+export const DELETE = async (request) => {
+  const id = await request.nextUrl.searchParams.get("id");
+  await EmailModel.findByIdAndDelete(id);
+  return NextResponse.json({ success: true, msg: "EmailID Deleted" });
+};

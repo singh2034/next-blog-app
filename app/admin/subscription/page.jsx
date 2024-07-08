@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import SubscriptionTableItem from "@/Components/AdminComponents/SubscriptionTableItem";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Subscriptions = () => {
   const [emails, setEmails] = useState([]);
@@ -12,9 +13,19 @@ const Subscriptions = () => {
     setEmails(response.data.emails);
   };
 
-const deleteEmail = async(mongoId) => {
-  
-}
+  const deleteEmail = async (mongoId) => {
+    const response = await axios.delete("/api/email", {
+      params: {
+        id: mongoId,
+      },
+    });
+    if (response.data.success) {
+      toast.success(response.data.msg);
+      fetchEmails();
+    } else {
+      toast.error("Error");
+    }
+  };
 
   useEffect(() => {
     fetchEmails();
@@ -46,6 +57,7 @@ const deleteEmail = async(mongoId) => {
                   mongoId={item._id}
                   email={item.email}
                   date={item.date}
+                  deleteEmail={deleteEmail}
                 />
               );
             })}
